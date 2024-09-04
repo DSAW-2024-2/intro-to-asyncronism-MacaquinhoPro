@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Pokédex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pokedex-container">
+        <img src="poke.png" alt="Pokeapi">
+        
+        <!-- Random Pokémon Section -->
+        <div id="random-pokemon-section" class="random-pokemon-section">
+            <h2>Random Pokémon</h2>
+            <div id="random-pokemon" class="pokemon-card">
+                <img src="" alt="Random Pokémon" id="random-pokemon-img">
+                <h2 id="random-pokemon-name">Loading...</h2>
+            </div>
+            <button id="random-pokemon-btn">Get Random Pokémon</button>
+        </div>
+
+        <div class="controls">
+            <div class="search-bar">
+                <input type="text" id="pokemon-search" placeholder="Search Pokémon by name...">
+                <button onclick="fetchPokemonByName()">Search</button>
+            </div>
+            <div class="filter-buttons">
+                <button onclick="fetchAllPokemons()">Show All</button>
+                <button onclick="filterByType('normal')">Normal</button>
+                <button onclick="filterByType('fire')">Fire</button>
+                <button onclick="filterByType('water')">Water</button>
+                <button onclick="filterByType('electric')">Electric</button>
+                <button onclick="filterByType('grass')">Grass</button>
+                <button onclick="filterByType('ice')">Ice</button>
+                <button onclick="filterByType('fighting')">Fighting</button>
+                <button onclick="filterByType('poison')">Poison</button>
+                <button onclick="filterByType('ground')">Ground</button>
+                <button onclick="filterByType('flying')">Flying</button>
+                <button onclick="filterByType('psychic')">Psychic</button>
+                <button onclick="filterByType('bug')">Bug</button>
+                <button onclick="filterByType('rock')">Rock</button>
+                <button onclick="filterByType('ghost')">Ghost</button>
+                <button onclick="filterByType('dragon')">Dragon</button>
+                <button onclick="filterByType('dark')">Dark</button>
+                <button onclick="filterByType('steel')">Steel</button>
+                <button onclick="filterByType('fairy')">Fairy</button>
+            </div>
+        </div>
+
+        <div id="pokemon-display" class="pokemon-display">
+            <!-- Pokémon cards will be displayed here -->
+        </div>
+
+        <!-- Pagination controls -->
+        <div class="pagination-controls">
+            <button id="prev-page" onclick="prevPage()">Previous</button>
+            <button id="next-page" onclick="nextPage()">Next</button>
+        </div>
+
+        <!-- Modal for displaying detailed Pokémon card -->
+        <div id="pokemon-modal" class="pokemon-modal">
+            <div class="pokemon-modal-content">
+                <span id="close-modal" class="close">&times;</span>
+                <div id="modal-content">
+                    <!-- Detailed Pokémon information will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
