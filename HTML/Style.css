@@ -339,6 +339,10 @@ button:active {
         gap: 15px;
     }
 
+    .pokemon-modal-content{
+        width: 70%;
+    }
+
     .pokemon-card {
         padding: 15px;
     }
