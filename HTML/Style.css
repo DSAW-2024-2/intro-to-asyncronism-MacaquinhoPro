@@ -347,6 +347,11 @@ button:active {
         font-size: 1.5rem;
     }
 
+    .close{
+        width: 5px;
+        height: 5px;
+    }
+
     .pokemon-card img {
         width: 100px;
         height: 100px;
@@ -383,6 +388,11 @@ button:active {
 
     .pokemon-card h2 {
         font-size: 1.2rem;
+    }
+
+    .close{
+        width: 5px;
+        height: 5px;
     }
 
     .random-pokemon-container {
