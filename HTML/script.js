@@ -1,6 +1,28 @@
 const apiUrl = 'https://pokeapi.co/api/v2/';
 let currentPage = 1;
 
+// Define a mapping between Pokémon types and background colors
+const typeColors = {
+    fire: '#FF7F50',
+    water: '#87CEEB',
+    grass: '#98FB98',
+    electric: '#FFD700',
+    ice: '#ADD8E6',
+    fighting: '#FA8072',
+    poison: '#DDA0DD',
+    ground: '#DEB887',
+    flying: '#87CEFA',
+    psychic: '#ffe0e9',
+    bug: '#A2CD5A',
+    rock: '#BDB76B',
+    ghost: '#DA70D6',
+    dragon: '#c2c2c2',
+    dark: '#A9A9A9',
+    steel: '#C0C0C0',
+    fairy: '#FFB6C1',
+    normal: '#D3D3D3'
+};
+
 // Fetch a random Pokémon
 function fetchRandomPokemon() {
     const randomId = Math.floor(Math.random() * 1024) + 1;
@@ -11,7 +33,7 @@ function fetchRandomPokemon() {
         .then(pokemon => {
             document.getElementById('random-pokemon-img').src = pokemon.sprites.other.home.front_default;
             document.getElementById('random-pokemon-name').textContent = capitalizeFirstLetter(pokemon.name);
-            document.getElementById('random-pokemon').setAttribute('onclick', `showPokemonDetails(${pokemon.id})`); // Make random Pokémon clickable
+            document.getElementById('random-pokemon').setAttribute('onclick', `showPokemonDetails(${pokemon.id})`);
         })
         .catch(error => {
             console.error('Error fetching random Pokémon:', error);
@@ -44,7 +66,6 @@ document.getElementById('pokemon-search').addEventListener('keydown', function(e
         fetchPokemonByName();
     }
 });
-
 
 // Filter Pokémon by type
 function filterByType(type) {
@@ -85,17 +106,23 @@ function fetchAllPokemons() {
         });
 }
 
-// Display Pokémon cards
+// Display Pokémon cards with background color based on type and shadow based on experience
 function displayPokemon(pokemons) {
     const pokemonDisplay = document.getElementById('pokemon-display');
-    pokemonDisplay.innerHTML = pokemons.map(pokemon => `
-        <div class="pokemon-card" onclick="showPokemonDetails(${pokemon.id})">
-            <img src="${pokemon.sprites.other.home.front_default}" alt="${pokemon.name}">
-            <h2>${capitalizeFirstLetter(pokemon.name)}</h2>
-            <p>ID: ${pokemon.id}</p>
-            <p>Type: ${pokemon.types.map(type => capitalizeFirstLetter(type.type.name)).join(', ')}</p>
-        </div>
-    `).join('');
+    pokemonDisplay.innerHTML = pokemons.map(pokemon => {
+        const primaryType = pokemon.types[0].type.name;
+        const bgColor = typeColors[primaryType] || '#FFF';
+        const boxShadow = pokemon.base_experience > 200 ? '0 8px 20px rgba(0, 0, 0, 0.5)' : '0 4px 10px rgba(0, 0, 0, 0.2)';
+
+        return `
+            <div class="pokemon-card" onclick="showPokemonDetails(${pokemon.id})" style="background-color: ${bgColor}; box-shadow: ${boxShadow}">
+                <img src="${pokemon.sprites.other.home.front_default}" alt="${pokemon.name}">
+                <h2>${capitalizeFirstLetter(pokemon.name)}</h2>
+                <p>ID: ${pokemon.id}</p>
+                <p>Type: ${pokemon.types.map(type => capitalizeFirstLetter(type.type.name)).join(', ')}</p>
+            </div>
+        `;
+    }).join('');
 }
 
 // Capitalize the first letter of a string
